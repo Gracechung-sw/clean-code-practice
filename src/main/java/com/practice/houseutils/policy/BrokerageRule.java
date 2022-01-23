@@ -5,11 +5,13 @@ public class BrokerageRule {
     private Long limitAmount;
 
     public Long calcMaxBrokerage(Long price) {
-        Double amount = Math.floor(brokeragePercent / 100 * price);
-        Long calculated_amount = amount.longValue();
         if (limitAmount == null) {
-            return calculated_amount;
+            return multiplyPercent(price);
         }
-        return Math.min(calculated_amount, limitAmount);
+        return Math.min(multiplyPercent(price), limitAmount);
+    }
+
+    private Long multiplyPercent(Long price) {
+        return Double.valueOf(Math.floor(brokeragePercent / 100 * price)).longValue();
     }
 }
