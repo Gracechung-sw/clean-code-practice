@@ -1,13 +1,8 @@
 package com.practice.houseutils.policy;
 
 
-public class RentBrokeragePolicy {
-    public Long calculate(Long price) {
-        BrokerageRule rule = createBrokerageRule(price);
-        return rule.calcMaxBrokerage(price);
-    }
-
-    private BrokerageRule createBrokerageRule(Long price) {
+public class RentBrokeragePolicy implements BrokeragePolicy{
+    public BrokerageRule createBrokerageRule(Long price) {
         BrokerageRule rule;
         if (price < 50_000_000) {
             rule = new BrokerageRule(0.5, 200_000L);
