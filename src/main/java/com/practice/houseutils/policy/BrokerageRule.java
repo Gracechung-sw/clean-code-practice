@@ -1,5 +1,8 @@
 package com.practice.houseutils.policy;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class BrokerageRule {
     private Double brokeragePercent;
     private Long limitAmount;
