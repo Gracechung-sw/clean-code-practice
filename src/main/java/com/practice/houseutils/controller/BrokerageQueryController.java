@@ -1,6 +1,8 @@
 package com.practice.houseutils.controller;
 
 import com.practice.houseutils.constants.ActionType;
+import com.practice.houseutils.policy.PurchaseBrokeragePolicy;
+import com.practice.houseutils.policy.RentBrokeragePolicy;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,9 +13,14 @@ public class BrokerageQueryController {
     public Long calcBrokerage(@RequestParam ActionType actionType,
                               @RequestParam Long price) {
 
-        // TODO: business logic - 중개수수료 계산하는 로직
+        if (actionType == ActionType.PURCHASE) {
+            PurchaseBrokeragePolicy policy = new PurchaseBrokeragePolicy();
+            return policy.calculate(price);
+        }
+        if (actionType == ActionType.RENT) {
+            RentBrokeragePolicy policy = new RentBrokeragePolicy();
+            return policy.calculate(price);
+        }
         return null;
-
-
     }
 }
